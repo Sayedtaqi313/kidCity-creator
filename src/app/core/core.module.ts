@@ -1,0 +1,135 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
+import { HomeContentComponent } from './components/home-content/home-content.component';
+
+import {
+  LucideAngularModule,
+  LogIn,
+  LogOut,
+  UserPlus,
+  Rocket,
+  Menu,
+  ArrowRight,
+  Star,
+  Home,
+  Gift,
+  Heart,
+  Sparkles,
+  Search,
+  MapPin,
+  Sun,
+  Moon,
+  X,
+  Linkedin,
+  Facebook,
+  Youtube,
+  Eye,
+  EyeOff,
+  Lock,
+  ArrowLeft,
+  Mail,
+  Info,
+  HelpCircle,
+  PlusCircle,
+  Image,
+  Users,
+  Clock,
+  Calendar,
+  Upload,
+  Activity,
+  User,
+  Baby,
+  Bell,
+  BookmarkCheck,
+  List,
+  Phone,
+  MessageCircle,
+  Camera,
+} from 'lucide-angular';
+import { BannerComponent } from './components/banner/banner.component';
+import { ScrollDirective } from './directives/window-scroll.directive';
+import { LoaderComponent } from './components/loader/loader.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { SvgIconComponent } from './components/svg-icon/svg-icon.comonent';
+
+@NgModule({
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    SnackbarComponent,
+    HomeContentComponent,
+    BannerComponent,
+    ScrollDirective,
+    LoaderComponent,
+    DialogComponent,
+    SvgIconComponent,
+  ],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    RouterModule,
+    FormsModule,
+    LucideAngularModule.pick({
+      LogIn,
+      LogOut,
+      UserPlus,
+      Rocket,
+      Menu,
+      ArrowRight,
+      Star,
+      Home,
+      Gift,
+      Heart,
+      Sparkles,
+      Search,
+      MapPin,
+      Calendar,
+      Sun,
+      Moon,
+      X,
+      Linkedin,
+      Facebook,
+      Youtube,
+      Mail,
+      ArrowLeft,
+      Lock,
+      Eye,
+      EyeOff,
+      Info,
+      HelpCircle,
+      PlusCircle,
+      Image,
+      Users,
+      Clock,
+      Upload,
+      Activity,
+      User,
+      Baby,
+      Bell,
+      BookmarkCheck,
+      List,
+      Phone,
+      MessageCircle,
+      Camera,
+    }),
+  ],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    SnackbarComponent,
+    HomeContentComponent,
+    BannerComponent,
+    LucideAngularModule,
+    LoaderComponent,
+    DialogComponent,
+    SvgIconComponent,
+  ],
+})
+export class CoreModule {}

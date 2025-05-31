@@ -1,0 +1,329 @@
+<app-loader *ngIf="isLoading"></app-loader>
+
+<div
+  class="bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100 mt-16 py-4 mb-6"
+  *ngIf="activity"
+>
+  <!-- Mobile view (stacked) -->
+  <div class="block md:hidden">
+    <!-- Image section with gradient overlay -->
+    <div class="relative w-full h-72 overflow-hidden">
+      <img
+        [src]="activity.imageUrl"
+        [alt]="activity.title"
+        class="w-full h-full object-cover"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"
+      ></div>
+      <h2
+        class="absolute bottom-4 left-4 right-4 text-2xl font-bold text-white drop-shadow-md"
+      >
+        {{ activity.title }}
+      </h2>
+      <div
+        class="absolute bottom-4 right-4 text-2xl font-bold text-white drop-shadow-md"
+      >
+        <div class="flex items-center gap-4">
+          <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-green-400 text-green-800 text-lg"
+          >
+            <lucide-icon name="Activity"></lucide-icon>
+          </div>
+          <div>
+            <p
+              class="text-xs text-gray-300 uppercase font-semibold tracking-wider"
+            >
+              ACTIVITY TYPE
+            </p>
+            <p class="text-gray-100 font-medium">{{ activity.type }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-5 space-y-5">
+      <div
+        class="relative pl-4 border-l-4 border-green-500 italic text-gray-600"
+      >
+        <p class="text-lg">{{ activity.shortDescription }}</p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 py-4 border-y border-gray-100">
+        <div class="flex items-center gap-3">
+          <div
+            class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary"
+          >
+            <lucide-icon name="MapPin"></lucide-icon>
+          </div>
+          <div>
+            <p class="text-xs text-gray-500 uppercase font-semibold">
+              Location
+            </p>
+            <p class="text-gray-800">{{ activity.location }}</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div
+            class="flex items-center justify-center w-10 h-10 rounded-full bg-amber-100 text-amber-600"
+          >
+            <lucide-icon name="Users"></lucide-icon>
+          </div>
+          <div>
+            <p class="text-xs text-gray-500 uppercase font-semibold">
+              Age Range
+            </p>
+            <p class="text-gray-800">
+              {{ activity.minAge }} - {{ activity.maxAge }} years
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div
+            class="flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 text-blue-600"
+          >
+            <lucide-icon name="Clock"></lucide-icon>
+          </div>
+          <div>
+            <p class="text-xs text-gray-500 uppercase font-semibold">
+              Duration
+            </p>
+            <p class="text-gray-800">{{ activity.duration }} min</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div
+            class="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 text-green-600"
+          >
+            <lucide-icon name="Calendar"></lucide-icon>
+          </div>
+          <div>
+            <p class="text-xs text-gray-500 uppercase font-semibold">
+              Availability
+            </p>
+            <p class="text-gray-800">{{ activity.availability }}</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div
+            class="flex items-center justify-center w-10 h-10 rounded-full bg-red-100 text-purple-600 text-lg"
+          >
+            <lucide-icon name="Clock"></lucide-icon>
+          </div>
+          <div>
+            <p class="text-xs text-gray-500 uppercase font-semibold">
+              Created at
+            </p>
+            <p class="text-gray-800">{{ activity.created_at }}</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div
+            class="flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 text-yellow-600 text-lg"
+          >
+            <lucide-icon name="Users"></lucide-icon>
+          </div>
+          <div>
+            <p class="text-xs text-gray-500 uppercase font-semibold">
+              Joined users
+            </p>
+            <p class="text-gray-800">{{ activity.joinedCount }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-3">
+        <h3 class="text-xl font-semibold text-gray-800">About This Activity</h3>
+        <p class="text-gray-700 leading-relaxed">
+          {{ activity.detailedDescription }}
+        </p>
+      </div>
+
+      <!-- Mobile action buttons -->
+      <div class="flex justify-between items-center mt-5">
+        <button
+          (click)="navigateToEdit(activity.id)"
+          class="rounded-lg bg-green-500 px-3 py-1.5 text-center font-medium text-white hover:bg-green-600 transition-all focus:outline-none"
+        >
+          Edit Activity
+        </button>
+        <button
+          (click)="deleteActivity(activity.id)"
+          class="rounded-lg border bg-red-500 px-3 py-1.5 text-center font-medium text-white hover:bg-red-600 transition-all focus:outline-none"
+        >
+          Delete Activity
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Desktop view (side by side) -->
+  <div class="hidden md:grid md:grid-cols-5">
+    <div class="col-span-2 overflow-hidden">
+      <img
+        [src]="activity.imageUrl"
+        [alt]="activity.title"
+        class="w-full h-full object-cover"
+      />
+    </div>
+
+    <div class="col-span-3 p-8 space-y-6">
+      <div>
+        <div class="flex justify-between items-center">
+          <h2 class="text-3xl font-bold text-gray-800 mb-3">
+            {{ activity.title }}
+          </h2>
+          <div>
+            <div class="flex items-center gap-4">
+              <div
+                class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600 text-lg"
+              >
+                <lucide-icon name="Activity"></lucide-icon>
+              </div>
+              <div>
+                <p
+                  class="text-xs text-gray-500 uppercase font-semibold tracking-wider"
+                >
+                  ACTIVITY TYPE
+                </p>
+                <p class="text-gray-800 font-medium">{{ activity.type }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="relative pl-5 border-l-4 border-blue-600 italic text-gray-800"
+        >
+          <p class="text-lg">{{ activity.shortDescription }}</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6 py-5 border-y border-gray-100">
+        <div class="flex items-center gap-4">
+          <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-green-600 text-lg"
+          >
+            <lucide-icon name="MapPin"></lucide-icon>
+          </div>
+          <div>
+            <p
+              class="text-xs text-gray-500 uppercase font-semibold tracking-wider"
+            >
+              Location
+            </p>
+            <p class="text-gray-800 font-medium">{{ activity.location }}</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-green-600 text-lg"
+          >
+            <lucide-icon name="Users"></lucide-icon>
+          </div>
+          <div>
+            <p
+              class="text-xs text-gray-500 uppercase font-semibold tracking-wider"
+            >
+              Age Range
+            </p>
+            <p class="text-gray-800 font-medium">
+              {{ activity.minAge }} - {{ activity.maxAge }} years
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-green-600 text-lg"
+          >
+            <lucide-icon name="Clock"></lucide-icon>
+          </div>
+          <div>
+            <p
+              class="text-xs text-gray-500 uppercase font-semibold tracking-wider"
+            >
+              Duration
+            </p>
+            <p class="text-gray-800 font-medium">{{ activity.duration }} min</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-green-600 text-lg"
+          >
+            <lucide-icon name="Calendar"></lucide-icon>
+          </div>
+          <div>
+            <p
+              class="text-xs text-gray-500 uppercase font-semibold tracking-wider"
+            >
+              Availability
+            </p>
+            <p class="text-gray-800 font-medium">{{ activity.availability }}</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-green-600 text-lg"
+          >
+            <lucide-icon name="Clock"></lucide-icon>
+          </div>
+          <div>
+            <p
+              class="text-xs text-gray-500 uppercase font-semibold tracking-wider"
+            >
+              Created at
+            </p>
+            <p class="text-gray-800 font-medium">{{ activity.created_at }}</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-green-600 text-lg"
+          >
+            <lucide-icon name="Users"></lucide-icon>
+          </div>
+          <div>
+            <p
+              class="text-xs text-gray-500 uppercase font-semibold tracking-wider"
+            >
+              Joined users
+            </p>
+            <p class="text-gray-800 font-medium">{{ activity.joinedCount }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-3">
+        <h3 class="text-xl font-semibold text-gray-800">About This Activity</h3>
+        <p class="text-gray-700 leading-relaxed">
+          {{ activity.detailedDescription }}
+        </p>
+      </div>
+
+      <div class="flex justify-between items-center">
+        <button
+          (click)="navigateToEdit(activity.id)"
+          class="rounded-lg bg-green-500 px-3 py-1.5 text-center font-medium text-white hover:bg-green-600 transition-all focus:outline-none"
+        >
+          Edit Activity
+        </button>
+        <button
+          (click)="deleteActivity(activity.id)"
+          class="rounded-lg border bg-red-500 px-3 py-1.5 text-center font-medium text-white hover:bg-red-600 transition-all focus:outline-none"
+        >
+          Delete Activity
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

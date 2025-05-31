@@ -1,0 +1,145 @@
+<app-loader *ngIf="isLoading"></app-loader>
+<div
+  *ngIf="!isLoading && activities.length === 0"
+  class="p-2 flex items-center justify-center relative min-h-screen bg-gray-50"
+>
+  <div class="max-w-2xl w-full mx-auto">
+    <div class="bg-white rounded-lg p-6 border-2 border-dashed border-gray-200">
+      <div class="flex flex-col items-center text-center space-y-4">
+        <div class="relative">
+          <div
+            class="relative bg-gray-50 p-3 rounded-full border border-gray-300"
+          >
+            <lucide-icon
+              name="sparkles"
+              class="w-10 h-10 text-gray-500"
+            ></lucide-icon>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h2 class="text-base font-semibold text-gray-900">
+            No activities available
+          </h2>
+          <p class="text-xs text-gray-500 text-center max-w-xs">
+            You haven’t added any activities yet — get started by creating your
+            first one!
+          </p>
+        </div>
+
+        <button
+          (click)="navigateToCreate()"
+          class="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-blue-600 px-8 py-3 font-medium text-white transition duration-300 ease-out hover:bg-gradient-to-r hover:from-blue-600 hover:to-green-600"
+        >
+          <span
+            class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-green-600 group-hover:translate-x-0 ease"
+          >
+            <lucide-icon name="plus-circle" class="w-6 h-6"></lucide-icon>
+          </span>
+          <span
+            class="absolute flex items-center justify-center w-full h-full text-white transition-all duration-300 transform group-hover:translate-x-full ease"
+          >
+            Create Activity
+          </span>
+          <span class="relative invisible">Create Activity</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="container mx-auto p-4 mt-20 bg-gray-50 min-h-screen"
+  *ngIf="activities.length > 0 && !isLoading"
+>
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4"
+  >
+    <div
+      *ngFor="let activity of activities"
+      class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 w-full min-w-[280px] max-w-[360px] mx-auto"
+    >
+      <div class="flex flex-col h-full">
+        <div class="relative aspect-video">
+          <img
+            [src]="activity.imageUrl"
+            alt="Activity"
+            class="w-full h-full object-cover"
+          />
+          <div class="absolute top-2 right-2">
+            <span
+              class="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-medium shadow-md"
+            >
+              {{ activity.type }} Activity
+            </span>
+          </div>
+        </div>
+
+        <!-- Content Section -->
+        <div class="p-4 flex-1 flex flex-col">
+          <!-- Header -->
+          <div class="flex justify-between items-start mb-2 gap-2">
+            <h3 class="text-lg font-semibold text-gray-900 truncate">
+              {{ activity.title }}
+            </h3>
+            <span class="text-sm text-gray-500 shrink-0">
+              {{ activity.timeAge }}
+            </span>
+          </div>
+
+          <!-- Location -->
+          <div class="flex items-center text-gray-600 mb-3">
+            <lucide-icon
+              name="MapPin"
+              class="w-4 h-4 mr-1 text-blue-500 shrink-0"
+            ></lucide-icon>
+            <span class="text-sm truncate">{{ activity.location }}</span>
+          </div>
+
+          <!-- Age Ranges -->
+          <div class="flex flex-wrap gap-2 mb-3">
+            <div class="flex items-center bg-blue-50 rounded-full px-2 py-1">
+              <lucide-icon
+                name="Baby"
+                class="w-4 h-4 text-green-500 mr-1"
+              ></lucide-icon>
+              <span class="text-xs text-green-700"
+                >Min {{ activity.minAge }}yrs</span
+              >
+            </div>
+            <div class="flex items-center bg-green-50 rounded-full px-2 py-1">
+              <lucide-icon
+                name="User"
+                class="w-4 h-4 text-blue-500 mr-1"
+              ></lucide-icon>
+              <span class="text-xs text-blue-700"
+                >Max {{ activity.maxAge }}yrs</span
+              >
+            </div>
+          </div>
+
+          <!-- Description -->
+          <p class="text-gray-600 text-sm mb-4 line-clamp-3 flex-1">
+            {{ activity.shortDescription }}
+          </p>
+
+          <!-- Buttons -->
+          <div class="grid grid-cols-2 gap-2 mt-auto">
+            <button
+              (click)="navigateToDetail(activity.id)"
+              class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-3 rounded-lg transition-colors duration-200 text-sm sm:text-base"
+            >
+              Details
+            </button>
+            <button
+              (click)="navigateToEdit(activity.id)"
+              class="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-3 rounded-lg transition-colors duration-200 text-sm sm:text-base"
+            >
+              Edit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

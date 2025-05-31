@@ -1,0 +1,17 @@
+button[type="submit"] {
+  position: relative;
+  min-width: 120px;
+  min-height: 2.5rem; /* ensure the button never shrinks below this */
+  display: inline-flex; /* use flex to center children */
+  align-items: center;
+  justify-content: center;
+}
+
+/* you can drop the “absolute” from your text if you like; opacity alone will hide it but preserve the space */
+.loading-text {
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+.loading-text.hidden {
+  opacity: 0;
+}
