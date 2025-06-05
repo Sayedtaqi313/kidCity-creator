@@ -21,7 +21,6 @@ export class AllActivitiesComponent implements OnInit {
     this.isLoading = true;
     this.activityService.getAllActivities().subscribe({
       next: (res) => {
-        console.log(res);
         this.activities = res;
         this.isLoading = false;
       },

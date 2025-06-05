@@ -35,7 +35,6 @@ export class ProfileService {
       .put<any>(`${this.appUrl}/user/creator/profile/update`, data)
       .pipe(
         tap((res) => {
-          console.log('res', res);
           if (res.statusCode == 200) {
             const user = {
               firstName: res.user.firstName,

@@ -1,14 +1,11 @@
-<div class="bg-gray-50 min-h-screen flex justify-center items-center mt-16">
-  <!-- wider container -->
+<div class="bg-gray-50 min-h-screen flex justify-center mt-16">
   <div class="max-w-2xl w-full px-4 mx-auto mt-4 sm:mt-6">
-    <!-- Notifications Section -->
     <div *ngIf="notifications.length > 0 && !isLoading">
       <div class="mb-4" *ngFor="let notification of notifications">
         <div
           class="bg-white w-full rounded-lg shadow-sm p-3 sm:p-4 transition-shadow duration-300 hover:shadow-md"
         >
           <div class="flex gap-3 sm:gap-4 w-full">
-            <!-- Avatar + Time -->
             <div class="flex-shrink-0">
               <ng-container
                 *ngIf="notification.sender?.imageUrl; else fallback"
@@ -113,9 +110,8 @@
 
     <div
       *ngIf="notifications.length === 0 && !isLoading"
-      class="bg-white rounded-lg border-2 -mt-16 border-dashed border-gray-200 p-6 flex flex-col items-center min-h-[150px] sm:min-h-[200px]"
+      class="bg-white rounded-lg border-2 mt-16 border-dashed border-gray-200 p-6 flex flex-col items-center min-h-[150px] sm:min-h-[200px]"
     >
-      <!-- empty state SVG & text -->
       <svg
         width="48"
         height="48"
