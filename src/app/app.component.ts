@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   ) {
     this.authService.autoLogin();
   }
+  title = 'KidsCity-Creator';
   ngOnInit(): void {
     this.notificationsService.initialize();
   }

@@ -3,6 +3,7 @@ import { Sparkles } from 'lucide-angular';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-banner',
@@ -13,6 +14,9 @@ export class BannerComponent implements OnInit {
   isLoggedInSubs!: Subscription;
   isLoggedIn: boolean = false;
   isInit: boolean = false;
+  appName: string = '';
+  isCreator: boolean = false;
+  appUrl: string = '';
   constructor(private authService: AuthService, private router: Router) {
     this.isLoggedInSubs = this.authService.isAuthenticatedSubject
       .pipe()
@@ -24,7 +28,14 @@ export class BannerComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.appName = environment.appName;
+    if (this.appName === 'creator') {
+      this.appUrl = environment.subscriberUrl;
+    } else if (this.appName === 'subscriber') {
+      this.appUrl = environment.creatorUrl;
+    }
+  }
   scrollToHomeContent(): void {
     const homeContent = document.getElementById('home-content');
     if (homeContent) {
@@ -38,5 +49,8 @@ export class BannerComponent implements OnInit {
     } else {
       this.router.navigate(['/auth', 'signin']);
     }
+  }
+  switch() {
+    window.open(this.appUrl, '_blank');
   }
 }
